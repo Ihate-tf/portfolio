@@ -555,46 +555,98 @@
             new SmoothCustomCursor();
         }
 
-        document.querySelector('.card-1').addEventListener('click', function(){
+        // Select all cards (e.g. .card-1, .card-2, etc.)
+const cards = document.querySelectorAll('.tube');
 
-            if(this.classList.contains('click1')) {
-                // Collapse
-                this.classList.remove('click1');
-                this.style.width = '35px';
-                this.style.height = '';
-                this.style.position = 'initial';
-                this.style.left = "0%";
-                this.style.transition = '';
-                this.style.transition = 'all 0.7s ease';
-            } else {
-                // Expand
-                this.classList.add('click1');
-                this.style.width = '600px';
-                this.style.height = '520px';
-                this.style.left = "-81%";
-                this.style.left = "-25%";
-                this.style.position = 'absolute';
-                this.style.backgroundPositionX = "center";
-                this.style.transition = 'all 0.7s ease';
+cards.forEach(card => {
+    // Click toggle expand/collapse
+    card.addEventListener('click', function () {
+        if (this.classList.contains('click1')) {
+            // Collapse
+            this.classList.remove('click1');
+            this.style.width = '35px';
+            this.style.height = '';
+            this.style.position = 'initial';
+            this.style.left = "0%";
+            this.style.transition = 'all 0.7s ease';
+        } else {
+            // Expand
+            this.classList.add('click1');
+            this.style.width = '600px';
+            this.style.height = '520px';
+            this.style.position = 'absolute';
+            this.style.zIndex = '999';
+            this.style.left = "-73%";
+            this.style.bottom = "-25%";
+            this.style.backgroundPositionX = "center";
+            this.style.transition = 'all 0.7s ease';
+        }
+    });
+
+    // Hover in (only if expanded)
+    card.addEventListener('mouseenter', function () {
+        if (this.classList.contains('click1')) {
+            const bgUrl = this.getAttribute('data-bg');
+            if (bgUrl) {
+                fadeInBackground(bgUrl);
             }
-            
-            document.querySelector('.click1').addEventListener('mouseenter', () => {
-                const bgUrl = document.querySelector('.click1').getAttribute('data-bg');
-                if (bgUrl) {
-                    fadeInBackground(bgUrl);
+        }
+    });
+
+    // Hover out (only if expanded)
+    card.addEventListener('mouseleave', function () {
+        if (this.classList.contains('click1')) {
+            setTimeout(() => {
+                const hoveredCards = document.querySelectorAll('.tube');
+                if (hoveredCards.length === 0) {
+                    fadeOutBackground();
                 }
-            });
+            }, 50);
+        }
+    });
+});
 
-            document.querySelector('.click1').addEventListener('mouseleave', () => {
-                setTimeout(() => {
-                    const hoveredCards = document.querySelectorAll('.tube:hover');
-                    if (hoveredCards.length === 0) {
-                        fadeOutBackground();
-                    }
-                }, 50);
-            });
 
-        });
+        // document.querySelector('.card-1').addEventListener('click', function(){
+
+        //     if(this.classList.contains('click1')) {
+        //         // Collapse
+        //         this.classList.remove('click1');
+        //         this.style.width = '35px';
+        //         this.style.height = '';
+        //         this.style.position = 'initial';
+        //         this.style.left = "0%";
+        //         this.style.transition = '';
+        //         this.style.transition = 'all 0.7s ease';
+        //     } else {
+        //         // Expand
+        //         this.classList.add('click1');
+        //         this.style.width = '600px';
+        //         this.style.height = '520px';
+        //         this.style.left = "-81%";
+        //         this.style.left = "-25%";
+        //         this.style.position = 'absolute';
+        //         this.style.backgroundPositionX = "center";
+        //         this.style.transition = 'all 0.7s ease';
+        //     }
+            
+        //     document.querySelector('.click1').addEventListener('mouseenter', () => {
+        //         const bgUrl = document.querySelector('.click1').getAttribute('data-bg');
+        //         if (bgUrl) {
+        //             fadeInBackground(bgUrl);
+        //         }
+        //     });
+
+        //     document.querySelector('.click1').addEventListener('mouseleave', () => {
+        //         setTimeout(() => {
+        //             const hoveredCards = document.querySelectorAll('.tube:hover');
+        //             if (hoveredCards.length === 0) {
+        //                 fadeOutBackground();
+        //             }
+        //         }, 50);
+        //     });
+
+        // });
 
     </script>
 </body>
