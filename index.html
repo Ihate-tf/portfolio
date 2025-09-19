@@ -24,7 +24,6 @@
             font-optical-sizing: auto;
             overflow-x: hidden;
             position: relative;
-
         }
 
         .navbar,
@@ -51,6 +50,7 @@
             background-color: red;
             transition: transform 0.5s ease;
             cursor: none;
+            position: relative;
         }
 
         .card-1 {
@@ -165,6 +165,10 @@
             text-align: center;
         }
 
+        .transitionClass {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .card-1:hover::before,
         .card-2:hover::before,
         .card-3:hover::before,
@@ -219,101 +223,7 @@
             transform: translate(-50%, -50%) scale(4);
         }
 
-        /* Dialog Styles */
-        .dialog-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease;
-        }
-
-        .dialog-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .dialog {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            width: 80%;
-            max-width: 600px;
-            background: #1a1a1a;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .dialog.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .dialog-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
-
-        .dialog-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .dialog h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #4CAF50;
-        }
-
-        .dialog p {
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .dialog-content {
-            margin-top: 30px;
-        }
-
-        .dialog-content h3 {
-            color: #4CAF50;
-            margin-bottom: 10px;
-        }
-
-        .dialog-content ul {
-            padding-left: 20px;
-        }
-
-        .dialog-content li {
-            margin-bottom: 8px;
-        }
-
+        /* Button Styles */
         .hidBtn, .close {
             display: none;
             padding: 10px 20px;
@@ -323,9 +233,52 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
-            transition: background-color 0.3s ease;
+            transition: all 0.5s ease;
+            position: absolute;
+            z-index: 1001;
         }
 
+        .hidBtn:hover, .close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Fullscreen state */
+        .tube.fullscreen {
+            position: fixed !important;
+            width: 100% !important;
+            height: 100vh !important;
+            left: 0 !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            transform: none !important;
+            border-radius: 0 !important;
+            background-size: cover;
+            transition: all 0.7s ease;
+        }
+
+        .tube.expanded {
+            width: 600px;
+            height: 520px;
+            position: absolute;
+            z-index: 999;
+            left: -73%;
+            bottom: -25%;
+            top: -21%;
+            background-position: center;
+            transition: all 0.7s ease;
+        }
+
+        .tube.expanded .hidBtn {
+            display: block;
+            bottom: 20%;
+            left: 10%;
+        }
+
+        .tube.fullscreen .close {
+            display: block;
+            top: 20px;
+            right: 20px;
+        }
     </style>
 </head>
 
@@ -347,35 +300,6 @@
 
     <!-- Preload images -->
     <div class="image-preloader" id="image-preloader"></div>
-
-    <!-- Dialog Overlay -->
-    <div class="dialog-overlay" id="dialogOverlay"></div>
-
-    <!-- Dialog -->
-    <div class="dialog" id="projectDialog">
-        <button class="dialog-close" id="dialogClose">&times;</button>
-        <h2>Project Showcase</h2>
-        <p>This is a detailed view of the project. You can include images, descriptions, technologies used, and more
-            information about this amazing project.</p>
-
-        <div class="dialog-content">
-            <h3>Project Details</h3>
-            <ul>
-                <li><strong>Client:</strong> Tech Innovations Inc.</li>
-                <li><strong>Duration:</strong> 6 months</li>
-                <li><strong>Technologies:</strong> React, Node.js, MongoDB</li>
-                <li><strong>Role:</strong> Lead Frontend Developer</li>
-            </ul>
-
-            <h3>Key Features</h3>
-            <ul>
-                <li>Responsive design for all devices</li>
-                <li>Real-time data visualization</li>
-                <li>User authentication and authorization</li>
-                <li>Performance optimized for large datasets</li>
-            </ul>
-        </div>
-    </div>
 
     <section id="main-section">
         <!-- Background layers -->
@@ -399,18 +323,33 @@
                 <span class="tube card-1"
                     data-bg="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
                     <button class="hidBtn">Know More</button>
-                    <button class="close">close</button>
+                    <button class="close">&times;</button>
                 </span>
                 <span class="tube card-2"
-                    data-bg="https://images.unsplash.com/photo-1682687220067-dced9a881b56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"></span>
+                    data-bg="https://images.unsplash.com/photo-1682687220067-dced9a881b56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80">
+                    <button class="hidBtn">Know More</button>
+                    <button class="close">&times;</button>
+                </span>
                 <span class="tube card-3"
-                    data-bg="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"></span>
+                    data-bg="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">                    
+                    <button class="hidBtn">Know More</button>
+                    <button class="close">&times;</button>
+                </span>
                 <span class="tube card-4"
-                    data-bg="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1274&q=80"></span>
+                    data-bg="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1274&q=80">
+                    <button class="hidBtn">Know More</button>
+                    <button class="close">&times;</button>
+                </span>
                 <span class="tube card-5"
-                    data-bg="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80"></span>
+                    data-bg="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80">
+                    <button class="hidBtn">Know More</button>
+                    <button class="close">&times;</button>
+                </span>
                 <span class="tube card-6"
-                    data-bg="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"></span>
+                    data-bg="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+                    <button class="hidBtn">Know More</button>
+                    <button class="close">&times;</button>
+                </span>
             </div>
         </main>
 
@@ -466,11 +405,40 @@
             }, 800);
         }
 
-        // Add event listeners to all tubes
+        // Card state management
+        function resetCardToDefault(card) {
+            card.classList.remove('expanded', 'fullscreen');
+            card.style.cssText = '';
+            card.classList.add('transitionClass');
+            const hidBtn = card.querySelector('.hidBtn');
+            const closeBtn = card.querySelector('.close');
+            hidBtn.style.display = 'none';
+            closeBtn.style.display = 'none';
+        }
+
+        function expandCard(card) {
+            card.classList.add('expanded');
+            const hidBtn = card.querySelector('.hidBtn');
+            hidBtn.style.display = 'block';
+        }
+
+        function makeCardFullscreen(card) {
+            card.classList.remove('expanded');
+            card.classList.add('fullscreen');
+            const hidBtn = card.querySelector('.hidBtn');
+            const closeBtn = card.querySelector('.close');
+            hidBtn.style.display = 'none';
+            closeBtn.style.display = 'block';
+        }
+
+        // Initialize
+        preloadImages();
+
+        // Add event listeners to all tubes for hover effects
         document.querySelectorAll('.tube').forEach(tube => {
             tube.addEventListener('mouseenter', () => {
                 const bgUrl = tube.getAttribute('data-bg');
-                if (bgUrl) {
+                if (bgUrl && !tube.classList.contains('expanded') && !tube.classList.contains('fullscreen')) {
                     fadeInBackground(bgUrl);
                 }
             });
@@ -485,8 +453,37 @@
             });
         });
 
-        // Initialize
-        preloadImages();
+        // Add click event listeners to all cards
+        document.querySelectorAll('.tube').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking on buttons
+                if (e.target.classList.contains('hidBtn') || e.target.classList.contains('close')) {
+                    return;
+                }
+
+                if (this.classList.contains('expanded') || this.classList.contains('fullscreen')) {
+                    // Reset to default state
+                    resetCardToDefault(this);
+                } else {
+                    // Expand card
+                    expandCard(this);
+                }
+            });
+
+            // Add event listener to "Know More" button
+            const hidBtn = card.querySelector('.hidBtn');
+            hidBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                makeCardFullscreen(card);
+            });
+
+            // Add event listener to close button
+            const closeBtn = card.querySelector('.close');
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                resetCardToDefault(card);
+            });
+        });
 
         // Handle case when mouse leaves the entire section
         section.addEventListener('mouseleave', () => {
@@ -504,7 +501,7 @@
                 this.cursor = document.querySelector('.cursor');
                 this.bigBall = document.querySelector('.cursor__ball--big');
                 this.smallBall = document.querySelector('.cursor__ball--small');
-                this.hoverables = document.querySelectorAll('.tube, .navbar span, .footer span, a, .dialog-close');
+                this.hoverables = document.querySelectorAll('.tube, .navbar span, .footer span, a, .hidBtn, .close');
 
                 this.mouseX = 0;
                 this.mouseY = 0;
@@ -600,100 +597,6 @@
         } else {
             new SmoothCustomCursor();
         }
-
-        // Select all cards (e.g. .card-1, .card-2, etc.)
-        const cards = document.querySelectorAll('.tube');
-
-        cards.forEach(card => {
-            // Click toggle expand/collapse
-            card.addEventListener('click', function () {
-                if (this.classList.contains('click1')) {
-                    // Collapse
-                    this.classList.remove('click1');
-                    this.style.width = '35px';
-                    this.style.height = '';
-                    this.style.position = 'initial';
-                    this.style.left = "0%";
-                    this.style.zIndex = '1';
-                    this.style.transition = 'all 0.7s ease';
-                    document.querySelector('.hidBtn').style.display = 'none';
-                } else {
-                    // Expand
-                    this.classList.add('click1');
-                    this.style.width = '600px';
-                    this.style.height = '520px';
-                    this.style.position = 'absolute';
-                    this.style.zIndex = '999';
-                    this.style.left = "-73%";
-                    this.style.bottom = "-25%";
-                    this.style.top = "-21%";
-                    this.style.backgroundPositionX = "center";
-                    this.style.transition = 'all 0.7s ease';
-                    document.querySelector('.hidBtn').style.display = 'block';
-                    document.querySelector('.close').style.display = 'block';
-                    document.querySelector('.hidBtn').style.position = 'absolute';
-                    document.querySelector('.hidBtn').style.bottom = '20%';
-                    document.querySelector('.hidBtn').style.left = '10%';
-                }
-            });
-
-            // Hover in (only if expanded)
-            card.addEventListener('mouseenter', function () {
-                if (this.classList.contains('click1')) {
-                    const bgUrl = this.getAttribute('data-bg');
-                    if (bgUrl) {
-                        fadeInBackground(bgUrl);
-                    }
-                }
-            });
-
-            // Hover out (only if expanded)
-            card.addEventListener('mouseleave', function () {
-                if (this.classList.contains('click1')) {
-                    setTimeout(() => {
-                        const hoveredCards = document.querySelectorAll('.tube');
-                        if (hoveredCards.length === 0) {
-                            fadeOutBackground();
-                        }
-                    }, 50);
-                }
-            });
-        });
-
-document.querySelector('.hidBtn').addEventListener('click', function (e) {
-    console.log('Button clicked');
-    document.querySelector('.card-1').classList.remove('click1');
-    document.querySelector('.card-1').style.width = '100%';
-    document.querySelector('.card-1').style.height = '100vh';
-    document.querySelector('.card-1').style.position = 'fixed';
-    document.querySelector('.card-1').style.left = '0';
-    document.querySelector('.card-1').style.top = '0';
-    document.querySelector('.card-1').style.zIndex = '1000';
-    document.querySelector('.card-1').style.transition = 'all 0.7s ease';
-    document.querySelector('.hidBtn').style.display = 'none';
-
-    
-    e.stopPropagation();
-});
-
-document.querySelector('.close').addEventListener('click', function (e) {
-
-    document.querySelector('.card-1').classList.add('click1');
-    document.querySelector('.card-1').width = '600px';
-    document.querySelector('.card-1').height = '520px';
-    document.querySelector('.card-1').position = 'absolute';
-    document.querySelector('.card-1').zIndex = '999';
-    document.querySelector('.card-1').left = "-73%";
-    document.querySelector('.card-1').bottom = "-25%";
-    document.querySelector('.card-1').backgroundPositionX = "center";
-    document.querySelector('.card-1').transition = 'all 0.7s ease';
-    document.querySelector('.hidBtn').style.display = 'block';
-    document.querySelector('.hidBtn').style.position = 'absolute';
-    document.querySelector('.hidBtn').style.bottom = '20%';
-    document.querySelector('.hidBtn').style.left = '10%';
-});
-
-
     </script>
 </body>
 
