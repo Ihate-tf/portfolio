@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hari's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Josefin Sans", sans-serif;
+            background-color: #000;
+            transition: background-color 0.5s ease;
+            cursor: none;
+            font-optical-sizing: auto;
+            overflow-x: hidden;
+            position: relative;
+
+        }
+
+        .navbar,
+        .footer {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        .tube {
+            height: 350px;
+            width: 35px;
+            border-radius: 10px;
+            background-color: red;
+            transition: transform 0.5s ease;
+            cursor: none;
+        }
+
+        .card-1 {
+            background-image: url(https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80);
+            background-size: cover;
+        }
+
+        .card-2 {
+            background-image: url(https://images.unsplash.com/photo-1682687220067-dced9a881b56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80);
+            background-size: cover;
+        }
+
+        .card-3 {
+            background-image: url(https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80);
+            background-size: cover;
+        }
+
+        .card-4 {
+            background-image: url(https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1274&q=80);
+            background-size: cover;
+        }
+
+        .card-5 {
+            background-image: url(https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80);
+            background-size: cover;
+        }
+
+        .card-6 {
+            background-image: url(https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80);
+            background-size: cover;
+        }
+
+        .tube:hover {
+            transform: translateY(-15px);
+        }
+
+        .tubes {
+            position: relative;
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Main Section Styling */
+        section {
+            display: grid;
+            grid-template-rows: 60px 1fr 60px;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Layers */
+        .bg-layer {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bg-default {
+            background-color: #000;
+            opacity: 1;
+        }
+
+        .bg-overlay {
+            opacity: 0;
+        }
+
+        /* Preloader (hidden) */
+        .image-preloader {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Hover indicators */
+        .card-1::after,
+        .card-2::after,
+        .card-3::after,
+        .card-4::after,
+        .card-5::after,
+        .card-6::after {
+            content: "";
+            position: absolute;
+            height: 5px;
+            width: 5px;
+            border: 2px solid #ffffff;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .tube::before {
+            content: "View Project";
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-25px);
+            width: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-25px);
+            text-align: center;
+        }
+
+        .card-1:hover::before,
+        .card-2:hover::before,
+        .card-3:hover::before,
+        .card-4:hover::before,
+        .card-5:hover::before,
+        .card-6:hover::before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-35px);
+        }
+
+        .card-1:hover::after,
+        .card-2:hover::after,
+        .card-3:hover::after,
+        .card-4:hover::after,
+        .card-5:hover::after,
+        .card-6:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+
+        /* Custom Cursor Styles */
+        .cursor {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10000;
+        }
+
+        .cursor__ball {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            will-change: transform;
+        }
+
+        .cursor__ball circle {
+            fill: #f7f8fa;
+        }
+
+        .cursor__ball--big {
+            transition: transform 0.4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+
+        .cursor__ball--small {
+            transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .cursor-hover .cursor__ball--big {
+            transform: translate(-50%, -50%) scale(4);
+        }
+
+        /* Dialog Styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease;
+        }
+
+        .dialog-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 80%;
+            max-width: 600px;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dialog.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .dialog-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .dialog-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dialog h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .dialog p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .dialog-content {
+            margin-top: 30px;
+        }
+
+        .dialog-content h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .dialog-content ul {
+            padding-left: 20px;
+        }
+
+        .dialog-content li {
+            margin-bottom: 8px;
+        }
+
+        .hidBtn, .close {
+            display: none;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor">
+        <div class="cursor__ball cursor__ball--big">
+            <svg height="30" width="30">
+                <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
+            </svg>
+        </div>
+
+        <div class="cursor__ball cursor__ball--small">
+            <svg height="10" width="10">
+                <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Preload images -->
+    <div class="image-preloader" id="image-preloader"></div>
+
+    <!-- Dialog Overlay -->
+    <div class="dialog-overlay" id="dialogOverlay"></div>
+
+    <!-- Dialog -->
+    <div class="dialog" id="projectDialog">
+        <button class="dialog-close" id="dialogClose">&times;</button>
+        <h2>Project Showcase</h2>
+        <p>This is a detailed view of the project. You can include images, descriptions, technologies used, and more
+            information about this amazing project.</p>
+
+        <div class="dialog-content">
+            <h3>Project Details</h3>
+            <ul>
+                <li><strong>Client:</strong> Tech Innovations Inc.</li>
+                <li><strong>Duration:</strong> 6 months</li>
+                <li><strong>Technologies:</strong> React, Node.js, MongoDB</li>
+                <li><strong>Role:</strong> Lead Frontend Developer</li>
+            </ul>
+
+            <h3>Key Features</h3>
+            <ul>
+                <li>Responsive design for all devices</li>
+                <li>Real-time data visualization</li>
+                <li>User authentication and authorization</li>
+                <li>Performance optimized for large datasets</li>
+            </ul>
+        </div>
+    </div>
+
+    <section id="main-section">
+        <!-- Background layers -->
+        <div class="bg-layer bg-default"></div>
+        <div class="bg-layer bg-overlay" id="bg-overlay"></div>
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <span>Name</span>
+            <span>
+                <span>one thing</span>
+                <span>two thing</span>
+                <span>three thing</span>
+            </span>
+            <span>Contact</span>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="tubes">
+                <span class="tube card-1"
+                    data-bg="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+                    <button class="hidBtn">Know More</button>
+                    <button class="close">close</button>
+                </span>
+                <span class="tube card-2"
+                    data-bg="https://images.unsplash.com/photo-1682687220067-dced9a881b56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"></span>
+                <span class="tube card-3"
+                    data-bg="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"></span>
+                <span class="tube card-4"
+                    data-bg="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1274&q=80"></span>
+                <span class="tube card-5"
+                    data-bg="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80"></span>
+                <span class="tube card-6"
+                    data-bg="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"></span>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <div class="footer"></div>
+    </section>
+
+    <script>
+        // Image URLs mapped to cards
+        const cardBackgrounds = {
+            'card-1': 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            'card-2': 'https://images.unsplash.com/photo-1682687220067-dced9a881b56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80',
+            'card-3': 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            'card-4': 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1274&q=80',
+            'card-5': 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80',
+            'card-6': 'https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
+        };
+
+        // DOM Elements
+        const section = document.getElementById('main-section');
+        const bgOverlay = document.getElementById('bg-overlay');
+        const preloader = document.getElementById('image-preloader');
+        let currentTimeout = null;
+
+        // Preload all images
+        function preloadImages() {
+            Object.values(cardBackgrounds).forEach(url => {
+                const img = new Image();
+                img.src = url.trim();
+                preloader.appendChild(img);
+            });
+        }
+
+        // Fade in background smoothly
+        function fadeInBackground(imageUrl) {
+            if (currentTimeout) clearTimeout(currentTimeout);
+
+            bgOverlay.style.backgroundImage = `url('${imageUrl.trim()}')`;
+
+            currentTimeout = setTimeout(() => {
+                bgOverlay.style.opacity = '0.2';
+            }, 100);
+        }
+
+        // Fade out background smoothly
+        function fadeOutBackground() {
+            if (currentTimeout) clearTimeout(currentTimeout);
+
+            bgOverlay.style.opacity = '0';
+
+            currentTimeout = setTimeout(() => {
+                bgOverlay.style.backgroundImage = '';
+            }, 800);
+        }
+
+        // Add event listeners to all tubes
+        document.querySelectorAll('.tube').forEach(tube => {
+            tube.addEventListener('mouseenter', () => {
+                const bgUrl = tube.getAttribute('data-bg');
+                if (bgUrl) {
+                    fadeInBackground(bgUrl);
+                }
+            });
+
+            tube.addEventListener('mouseleave', () => {
+                setTimeout(() => {
+                    const hoveredCards = document.querySelectorAll('.tube:hover');
+                    if (hoveredCards.length === 0) {
+                        fadeOutBackground();
+                    }
+                }, 50);
+            });
+        });
+
+        // Initialize
+        preloadImages();
+
+        // Handle case when mouse leaves the entire section
+        section.addEventListener('mouseleave', () => {
+            setTimeout(() => {
+                const hoveredCards = document.querySelectorAll('.tube:hover');
+                if (hoveredCards.length === 0) {
+                    fadeOutBackground();
+                }
+            }, 50);
+        });
+
+        // Custom Cursor Implementation
+        class SmoothCustomCursor {
+            constructor() {
+                this.cursor = document.querySelector('.cursor');
+                this.bigBall = document.querySelector('.cursor__ball--big');
+                this.smallBall = document.querySelector('.cursor__ball--small');
+                this.hoverables = document.querySelectorAll('.tube, .navbar span, .footer span, a, .dialog-close');
+
+                this.mouseX = 0;
+                this.mouseY = 0;
+                this.cursorX = 0;
+                this.cursorY = 0;
+
+                this.isTicking = false;
+                this.rafId = null;
+                this.isAnimating = false;
+
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.startAnimation();
+            }
+
+            bindEvents() {
+                document.addEventListener('mousemove', (e) => {
+                    this.mouseX = e.clientX;
+                    this.mouseY = e.clientY;
+
+                    if (!this.isTicking) {
+                        this.rafId = requestAnimationFrame(() => {
+                            this.updatePosition();
+                            this.isTicking = false;
+                        });
+                        this.isTicking = true;
+                    }
+                });
+
+                this.hoverables.forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        this.cursor.classList.add('cursor-hover');
+                    });
+
+                    element.addEventListener('mouseleave', () => {
+                        this.cursor.classList.remove('cursor-hover');
+                    });
+                });
+
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        this.stopAnimation();
+                    } else {
+                        this.startAnimation();
+                    }
+                });
+
+                window.addEventListener('blur', () => {
+                    this.stopAnimation();
+                });
+
+                window.addEventListener('focus', () => {
+                    this.startAnimation();
+                });
+            }
+
+            updatePosition() {
+                this.cursorX += (this.mouseX - this.cursorX) * 0.15;
+                this.cursorY += (this.mouseY - this.cursorY) * 0.15;
+
+                this.smallBall.style.transform = `translate(${this.mouseX - 5}px, ${this.mouseY - 5}px)`;
+            }
+
+            animate() {
+                this.bigBall.style.transform = `translate(${this.cursorX - 15}px, ${this.cursorY - 15}px)`;
+
+                this.rafId = requestAnimationFrame(() => this.animate());
+            }
+
+            startAnimation() {
+                if (!this.isAnimating) {
+                    this.isAnimating = true;
+                    this.animate();
+                }
+            }
+
+            stopAnimation() {
+                if (this.rafId) {
+                    cancelAnimationFrame(this.rafId);
+                    this.isAnimating = false;
+                }
+            }
+        }
+
+        // Initialize cursor when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                new SmoothCustomCursor();
+            });
+        } else {
+            new SmoothCustomCursor();
+        }
+
+        // Select all cards (e.g. .card-1, .card-2, etc.)
+        const cards = document.querySelectorAll('.tube');
+
+        cards.forEach(card => {
+            // Click toggle expand/collapse
+            card.addEventListener('click', function () {
+                if (this.classList.contains('click1')) {
+                    // Collapse
+                    this.classList.remove('click1');
+                    this.style.width = '35px';
+                    this.style.height = '';
+                    this.style.position = 'initial';
+                    this.style.left = "0%";
+                    this.style.zIndex = '1';
+                    this.style.transition = 'all 0.7s ease';
+                    document.querySelector('.hidBtn').style.display = 'none';
+                } else {
+                    // Expand
+                    this.classList.add('click1');
+                    this.style.width = '600px';
+                    this.style.height = '520px';
+                    this.style.position = 'absolute';
+                    this.style.zIndex = '999';
+                    this.style.left = "-73%";
+                    this.style.bottom = "-25%";
+                    this.style.top = "-21%";
+                    this.style.backgroundPositionX = "center";
+                    this.style.transition = 'all 0.7s ease';
+                    document.querySelector('.hidBtn').style.display = 'block';
+                    document.querySelector('.close').style.display = 'block';
+                    document.querySelector('.hidBtn').style.position = 'absolute';
+                    document.querySelector('.hidBtn').style.bottom = '20%';
+                    document.querySelector('.hidBtn').style.left = '10%';
+                }
+            });
+
+            // Hover in (only if expanded)
+            card.addEventListener('mouseenter', function () {
+                if (this.classList.contains('click1')) {
+                    const bgUrl = this.getAttribute('data-bg');
+                    if (bgUrl) {
+                        fadeInBackground(bgUrl);
+                    }
+                }
+            });
+
+            // Hover out (only if expanded)
+            card.addEventListener('mouseleave', function () {
+                if (this.classList.contains('click1')) {
+                    setTimeout(() => {
+                        const hoveredCards = document.querySelectorAll('.tube');
+                        if (hoveredCards.length === 0) {
+                            fadeOutBackground();
+                        }
+                    }, 50);
+                }
+            });
+        });
+
+document.querySelector('.hidBtn').addEventListener('click', function (e) {
+    console.log('Button clicked');
+    document.querySelector('.card-1').classList.remove('click1');
+    document.querySelector('.card-1').style.width = '100%';
+    document.querySelector('.card-1').style.height = '100vh';
+    document.querySelector('.card-1').style.position = 'fixed';
+    document.querySelector('.card-1').style.left = '0';
+    document.querySelector('.card-1').style.top = '0';
+    document.querySelector('.card-1').style.zIndex = '1000';
+    document.querySelector('.card-1').style.transition = 'all 0.7s ease';
+    document.querySelector('.hidBtn').style.display = 'none';
+
+    
+    e.stopPropagation();
+});
+
+document.querySelector('.close').addEventListener('click', function (e) {
+
+    document.querySelector('.card-1').classList.add('click1');
+    document.querySelector('.card-1').width = '600px';
+    document.querySelector('.card-1').height = '520px';
+    document.querySelector('.card-1').position = 'absolute';
+    document.querySelector('.card-1').zIndex = '999';
+    document.querySelector('.card-1').left = "-73%";
+    document.querySelector('.card-1').bottom = "-25%";
+    document.querySelector('.card-1').backgroundPositionX = "center";
+    document.querySelector('.card-1').transition = 'all 0.7s ease';
+    document.querySelector('.hidBtn').style.display = 'block';
+    document.querySelector('.hidBtn').style.position = 'absolute';
+    document.querySelector('.hidBtn').style.bottom = '20%';
+    document.querySelector('.hidBtn').style.left = '10%';
+});
+
+
+    </script>
+</body>
+
+</html>
