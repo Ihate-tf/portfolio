@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -317,12 +316,64 @@
             padding: 4em 3em;
         }
 
-        @container (min-width: 300px) and (max-width: 600px) {
+        .tube {
+        container-type: inline-size;
+        }
+
+        .prof-image{
+            background-image: url('one.jpg');
+            height: 400px;
+            width: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .min-card{
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        @container (min-width: 0px) and (max-width: 100px) {
+            .min-card {
+                display: none;
+            }
+            .header-style{
+                display: none;
+            }
+        }
+
+        @container (min-width: 201px) and (max-width: 700px) {
+            .big {
+                display: none;
+            }
+
+            .min-card{
+                gap: 10px;
+            }
+
+            .header-style{
+                display: flex;
+            }
+        }
+
+        @container (min-width: 701px) and (max-width: 1200px) {
+
+            .small {
+                display: none;
+            }
+
+            .min-card{
+                gap: 10em;
+            }
+
+            .header-style{
+                display: flex;
+            }
 
         }
     </style>
 </head>
-
 <body>
     <!-- Custom Cursor -->
     <div class="cursor">
@@ -358,9 +409,21 @@
             <div class="tubes">
                 <span class="tube card-1"
                     data-bg="one.jpg">
-                    <div class="header-style">
-                        <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
-                        <span>Here are some of the content, Need to check the card</span>
+                    <div class="header-style min-card">
+                        <div>
+                            <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
+                            <span class="small">I turn complex problems into clean, efficient code. With 4+ years of experience in JavaScript, Node.js, and Python, I love building products that are not just functional — but delightful to use. I’m passionate about open-source and mentoring junior devs.s</span>
+                            <span class="big">I’m a full-stack developer who thrives on transforming complex, messy problems into clean, scalable, and elegant code. Over the past 4+ years, I’ve worked across the stack — from building responsive frontends with modern JavaScript frameworks, to architecting robust backend systems in Node.js and Python.
+
+But for me, development isn’t just about making things work — it’s about making them a joy to use. I obsess over performance, accessibility, and user experience — because the best code doesn’t just run well, it feels right to the people using it. Whether I’m optimizing load times, simplifying a confusing UI, or adding subtle micro-interactions — I’m always asking: “How can this be better for the human on the other side?”
+
+Beyond my day-to-day work, I’m deeply committed to giving back to the dev community. I actively contribute to open-source projects — because I believe great software should be shared, improved, and accessible to all. I also mentor junior developers, helping them navigate the early hurdles I once faced. There’s nothing more rewarding than watching someone grow from “I’m stuck” to “I built this — and it’s awesome.”
+
+When I’m not coding? You’ll find me exploring new tech stacks, writing dev tutorials, or geeking out over system design on a whiteboard. I believe curiosity is the engine of great engineering — and I’m always learning.</span>
+                        </div>
+                        <div>
+                            <div class="prof-image"></div>
+                        </div>
                     </div>
                     <button class="hidBtn">Know More</button>
                     <button class="close">&times;</button>
@@ -502,8 +565,11 @@
         document.querySelectorAll('.tube').forEach(tube => {
             tube.addEventListener('mouseenter', () => {
                 const bgUrl = tube.getAttribute('data-bg');
-                if (bgUrl && tube.classList.contains(expanded)) {
-                    fadeInBackground(bgUrl);
+                console.log(tube.classList.contains('expanded'));
+                if (bgUrl) {
+                    if(tube.classList.contains('expanded') == false){
+                        fadeInBackground(bgUrl);
+                    }
                 }
             });
 
@@ -527,9 +593,11 @@
 
                 if (this.classList.contains('expanded') || this.classList.contains('fullscreen')) {
                     // Reset to default state
+                    document.querySelector('.prof-image').style.display = 'none';
                     resetCardToDefault(this);
                 } else {
                     // Expand card
+                    document.querySelector('.prof-image').style.display = 'block';
                     expandCard(this);
                 }
             });
@@ -663,5 +731,4 @@
         }
     </script>
 </body>
-
 </html>
