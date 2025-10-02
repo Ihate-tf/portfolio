@@ -18,6 +18,8 @@
             font-family: "Italiana", sans-serif;
             font-weight: 400;
             font-style: normal;
+            color: white;
+            mix-blend-mode: difference;
         }
 
         body {
@@ -26,7 +28,7 @@
             font-style: normal;
             background-color: #000;
             transition: background-color 0.5s ease;
-            cursor: none;
+            /* cursor: none; */
             font-optical-sizing: auto;
             overflow-x: hidden;
             position: relative;
@@ -57,6 +59,10 @@
             transition: transform 0.5s ease;
             cursor: none;
             position: relative;
+        }
+
+        .small{
+            color: #efdcdc;
         }
 
         .card-1 {
@@ -112,6 +118,7 @@
 
         .tube:hover {
             transform: translateY(-15px);
+            background-position-x: left !important;
         }
 
         .tubes {
@@ -407,19 +414,19 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="tubes">
-                <span class="tube card-1"
+                <span class="tube card-1" style="background-position-x: right;"
                     data-bg="one.jpg">
                     <div class="header-style min-card">
                         <div>
                             <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
-                            <span class="small">I turn complex problems into clean, efficient code. With 4+ years of experience in JavaScript, Node.js, and Python, I love building products that are not just functional — but delightful to use. I’m passionate about open-source and mentoring junior devs.s</span>
-                            <span class="big">I’m a full-stack developer who thrives on transforming complex, messy problems into clean, scalable, and elegant code. Over the past 4+ years, I’ve worked across the stack — from building responsive frontends with modern JavaScript frameworks, to architecting robust backend systems in Node.js and Python.
+                            <span class="small">A web developer with a designer’s mindset—passionate about clean UIs, Gestalt principles, and exploring tomorrow’s tech today.</span>
+                            <span class="big">
+                                I’m a full-stack web application developer who believes great code should be matched by even better design. My approach blends technical precision with a deep understanding of UI/UX fundamentals, especially Gestalt principles like proximity, similarity, and continuity—ensuring every interface I build feels intuitive and harmonious.  
 
-But for me, development isn’t just about making things work — it’s about making them a joy to use. I obsess over performance, accessibility, and user experience — because the best code doesn’t just run well, it feels right to the people using it. Whether I’m optimizing load times, simplifying a confusing UI, or adding subtle micro-interactions — I’m always asking: “How can this be better for the human on the other side?”
+                                I thrive on learning: whether it’s experimenting with a new JavaScript framework, diving into AI-assisted development tools, or studying emerging design systems. I’m not just building websites—I’m crafting experiences that solve real problems.  
 
-Beyond my day-to-day work, I’m deeply committed to giving back to the dev community. I actively contribute to open-source projects — because I believe great software should be shared, improved, and accessible to all. I also mentor junior developers, helping them navigate the early hurdles I once faced. There’s nothing more rewarding than watching someone grow from “I’m stuck” to “I built this — and it’s awesome.”
-
-When I’m not coding? You’ll find me exploring new tech stacks, writing dev tutorials, or geeking out over system design on a whiteboard. I believe curiosity is the engine of great engineering — and I’m always learning.</span>
+                                Outside the screen, I recharge through gardening (watching things grow is oddly like debugging!), playing guitar (patterns in music = patterns in code), and staying active with regular workouts.
+                            </span>
                         </div>
                         <div>
                             <div class="prof-image"></div>
@@ -428,11 +435,20 @@ When I’m not coding? You’ll find me exploring new tech stacks, writing dev t
                     <button class="hidBtn">Know More</button>
                     <button class="close">&times;</button>
                 </span>
-                <span class="tube card-2"
+                <span class="tube card-2" style="background-position-x: right;"
                     data-bg="two.jpg">
                     <div class="header-style">
-                        <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
-                        <span>Here are some of the content, Need to check the card</span>
+                        <div>
+                            <h1 class="title-font" style="margin-bottom: 1em;">Skills</h1>
+                            <span class="small">Frontend to backend, design to deployment—I build full web experiences with modern tools and user-first thinking.</span>
+                            <span class="big">
+                                • Frontend: HTML5, CSS3 (Flexbox, Grid, animations), JavaScript (ES6+, DOM manipulation), responsive & mobile-first design  
+                                • Backend: PHP, SQL (MySQL), RESTful APIs, server-side logic  
+                                • Design & UX: UI/UX design using Gestalt principles, wireframing, Figma, accessibility best practices  
+                                • Workflow & Tools: Git/GitHub, Agile/Scrum methodologies, VS Code, browser DevTools, cross-browser testing  
+                                • Mindset: Performance-optimized, user-centered, and always learning. I don’t just write code—I craft solutions that look great, work fast, and feel right.
+                            </span>
+                        </div>
                     </div>
                     <button class="hidBtn">Know More</button>
                     <button class="close">&times;</button>
@@ -440,8 +456,21 @@ When I’m not coding? You’ll find me exploring new tech stacks, writing dev t
                 <span class="tube card-3"
                     data-bg="three.jpg">
                     <div class="header-style">
-                        <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
-                        <span>Here are some of the content, Need to check the card</span>
+                        <div>
+                            <h1 class="title-font" style="margin-bottom: 1em;">Work History</h1>
+                            <span class="small">Real-world experience building web apps in Agile teams—focused on clean code, smart design, and on-time delivery.</span>
+                            <span class="big">
+                                I’ve contributed to diverse web projects—from internal business tools to customer-facing applications—always with a dual focus on functionality and user experience.  
+
+                                In Agile environments, I’ve:  
+                                - Collaborated with designers and product owners to translate wireframes into pixel-perfect, responsive interfaces  
+                                - Developed PHP/JS applications with secure, scalable SQL backends  
+                                - Improved site performance by optimizing assets and database queries  
+                                - Participated in sprint planning, daily standups, and retrospectives to ensure smooth delivery  
+
+                                Every role has reinforced my belief: great software starts with understanding the user—not just the requirements.
+                            </span>
+                        </div>
                     </div>                    
                     <button class="hidBtn">Know More</button>
                     <button class="close">&times;</button>
@@ -449,8 +478,17 @@ When I’m not coding? You’ll find me exploring new tech stacks, writing dev t
                 <span class="tube card-4"
                     data-bg="four.jpg">
                     <div class="header-style">
-                        <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
-                        <span>Here are some of the content, Need to check the card</span>
+                        <div>
+                            <h1 class="title-font" style="margin-bottom: 1em;">Hobbies</h1>
+                            <span class="small">When I’m off-duty: growing plants, strumming chords, and staying strong—because balance fuels creativity.</span>
+                            <span class="big">
+                                • 🌱 Gardening: There’s a quiet joy in nurturing plants—much like debugging code or refining a UI. Both require patience, observation, and care.  
+                                • 🎸 Guitar: Music keeps my creative side alive. Learning new songs teaches pattern recognition and discipline—skills that surprisingly translate to algorithmic thinking!  
+                                • 💪 Workouts: Physical energy fuels mental clarity. Whether it’s lifting weights or a morning run, staying active helps me stay sharp during long coding sessions.  
+
+                                These aren’t just pastimes—they’re part of my rhythm. They remind me that growth, expression, and resilience matter both in life and in building great software.
+                            </span>
+                        </div>
                     </div>
                     <button class="hidBtn">Know More</button>
                     <button class="close">&times;</button>
@@ -458,8 +496,19 @@ When I’m not coding? You’ll find me exploring new tech stacks, writing dev t
                 <span class="tube card-5"
                     data-bg="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80">
                     <div class="header-style">
-                        <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
-                        <span>Here are some of the content, Need to check the card</span>
+                        <div>
+                            <h1 class="title-font" style="margin-bottom: 1em;">Contact Me</h1>
+                            <span class="small">Got a project, question, or just want to say hi? I’d love to hear from you!</span>
+                            <span class="big">
+                                    I’m always open to new opportunities, collaborations, or even a friendly chat about web dev, design systems, or the latest tech trends!  
+
+                                    📧 Email: [your.email@example.com]  
+                                    🔗 LinkedIn: [linkedin.com/in/yourname]  
+                                    🐙 GitHub: [github.com/yourusername]  
+
+                                    Feel free to reach out—I respond quickly and love connecting with fellow builders, designers, and innovators!
+                            </span>
+                        </div>
                     </div>
                     <button class="hidBtn">Know More</button>
                     <button class="close">&times;</button>
@@ -467,8 +516,19 @@ When I’m not coding? You’ll find me exploring new tech stacks, writing dev t
                 <span class="tube card-6"
                     data-bg="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
                     <div class="header-style">
-                        <h1 class="title-font" style="margin-bottom: 1em;">About Me</h1>
-                        <span>Here are some of the content, Need to check the card</span>
+                        <div>
+                            <h1 class="title-font" style="margin-bottom: 1em;">Projects</h1>
+                            <span class="small">A showcase of web apps I’ve built—where code meets design, and ideas become real.</span>
+                            <span class="big">
+                                Here you’ll find a curated selection of my personal and professional projects. Each one reflects my commitment to clean architecture, thoughtful UI, and user-centered problem solving.  
+
+                                From responsive dashboards built with HTML/CSS/JS to dynamic PHP-powered applications with SQL backends, every project applies core design principles (like Gestalt’s continuity and closure) to create seamless experiences.  
+
+                                Explore the live demos, peek at the code on GitHub, and see how I turn requirements into elegant, functional web applications.  
+
+                                New projects added regularly—because I never stop building!
+                            </span>
+                        </div> 
                     </div>
                     <button class="hidBtn">Know More</button>
                     <button class="close">&times;</button>
@@ -628,107 +688,107 @@ When I’m not coding? You’ll find me exploring new tech stacks, writing dev t
         });
 
         // Custom Cursor Implementation
-        class SmoothCustomCursor {
-            constructor() {
-                this.cursor = document.querySelector('.cursor');
-                this.bigBall = document.querySelector('.cursor__ball--big');
-                this.smallBall = document.querySelector('.cursor__ball--small');
-                this.hoverables = document.querySelectorAll('.tube, .navbar span, .footer span, a, .hidBtn, .close');
+        // class SmoothCustomCursor {
+        //     constructor() {
+        //         this.cursor = document.querySelector('.cursor');
+        //         this.bigBall = document.querySelector('.cursor__ball--big');
+        //         this.smallBall = document.querySelector('.cursor__ball--small');
+        //         this.hoverables = document.querySelectorAll('.tube, .navbar span, .footer span, a, .hidBtn, .close');
 
-                this.mouseX = 0;
-                this.mouseY = 0;
-                this.cursorX = 0;
-                this.cursorY = 0;
+        //         this.mouseX = 0;
+        //         this.mouseY = 0;
+        //         this.cursorX = 0;
+        //         this.cursorY = 0;
 
-                this.isTicking = false;
-                this.rafId = null;
-                this.isAnimating = false;
+        //         this.isTicking = false;
+        //         this.rafId = null;
+        //         this.isAnimating = false;
 
-                this.init();
-            }
+        //         this.init();
+        //     }
 
-            init() {
-                this.bindEvents();
-                this.startAnimation();
-            }
+        //     init() {
+        //         this.bindEvents();
+        //         this.startAnimation();
+        //     }
 
-            bindEvents() {
-                document.addEventListener('mousemove', (e) => {
-                    this.mouseX = e.clientX;
-                    this.mouseY = e.clientY;
+        //     bindEvents() {
+        //         document.addEventListener('mousemove', (e) => {
+        //             this.mouseX = e.clientX;
+        //             this.mouseY = e.clientY;
 
-                    if (!this.isTicking) {
-                        this.rafId = requestAnimationFrame(() => {
-                            this.updatePosition();
-                            this.isTicking = false;
-                        });
-                        this.isTicking = true;
-                    }
-                });
+        //             if (!this.isTicking) {
+        //                 this.rafId = requestAnimationFrame(() => {
+        //                     this.updatePosition();
+        //                     this.isTicking = false;
+        //                 });
+        //                 this.isTicking = true;
+        //             }
+        //         });
 
-                this.hoverables.forEach(element => {
-                    element.addEventListener('mouseenter', () => {
-                        this.cursor.classList.add('cursor-hover');
-                    });
+        //         this.hoverables.forEach(element => {
+        //             element.addEventListener('mouseenter', () => {
+        //                 this.cursor.classList.add('cursor-hover');
+        //             });
 
-                    element.addEventListener('mouseleave', () => {
-                        this.cursor.classList.remove('cursor-hover');
-                    });
-                });
+        //             element.addEventListener('mouseleave', () => {
+        //                 this.cursor.classList.remove('cursor-hover');
+        //             });
+        //         });
 
-                document.addEventListener('visibilitychange', () => {
-                    if (document.hidden) {
-                        this.stopAnimation();
-                    } else {
-                        this.startAnimation();
-                    }
-                });
+        //         document.addEventListener('visibilitychange', () => {
+        //             if (document.hidden) {
+        //                 this.stopAnimation();
+        //             } else {
+        //                 this.startAnimation();
+        //             }
+        //         });
 
-                window.addEventListener('blur', () => {
-                    this.stopAnimation();
-                });
+        //         window.addEventListener('blur', () => {
+        //             this.stopAnimation();
+        //         });
 
-                window.addEventListener('focus', () => {
-                    this.startAnimation();
-                });
-            }
+        //         window.addEventListener('focus', () => {
+        //             this.startAnimation();
+        //         });
+        //     }
 
-            updatePosition() {
-                this.cursorX += (this.mouseX - this.cursorX) * 0.15;
-                this.cursorY += (this.mouseY - this.cursorY) * 0.15;
+        //     updatePosition() {
+        //         this.cursorX += (this.mouseX - this.cursorX) * 0.15;
+        //         this.cursorY += (this.mouseY - this.cursorY) * 0.15;
 
-                this.smallBall.style.transform = `translate(${this.mouseX - 5}px, ${this.mouseY - 5}px)`;
-            }
+        //         this.smallBall.style.transform = `translate(${this.mouseX - 5}px, ${this.mouseY - 5}px)`;
+        //     }
 
-            animate() {
-                this.bigBall.style.transform = `translate(${this.cursorX - 15}px, ${this.cursorY - 15}px)`;
+        //     animate() {
+        //         this.bigBall.style.transform = `translate(${this.cursorX - 15}px, ${this.cursorY - 15}px)`;
 
-                this.rafId = requestAnimationFrame(() => this.animate());
-            }
+        //         this.rafId = requestAnimationFrame(() => this.animate());
+        //     }
 
-            startAnimation() {
-                if (!this.isAnimating) {
-                    this.isAnimating = true;
-                    this.animate();
-                }
-            }
+        //     startAnimation() {
+        //         if (!this.isAnimating) {
+        //             this.isAnimating = true;
+        //             this.animate();
+        //         }
+        //     }
 
-            stopAnimation() {
-                if (this.rafId) {
-                    cancelAnimationFrame(this.rafId);
-                    this.isAnimating = false;
-                }
-            }
-        }
+        //     stopAnimation() {
+        //         if (this.rafId) {
+        //             cancelAnimationFrame(this.rafId);
+        //             this.isAnimating = false;
+        //         }
+        //     }
+        // }
 
-        // Initialize cursor when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                new SmoothCustomCursor();
-            });
-        } else {
-            new SmoothCustomCursor();
-        }
+        // // Initialize cursor when DOM is ready
+        // if (document.readyState === 'loading') {
+        //     document.addEventListener('DOMContentLoaded', () => {
+        //         new SmoothCustomCursor();
+        //     });
+        // } else {
+        //     new SmoothCustomCursor();
+        // }
     </script>
 </body>
 </html>
