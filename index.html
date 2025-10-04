@@ -58,7 +58,7 @@
             height: 350px;
             width: 35px;
             border-radius: 10px;
-            background-color: red;
+            background-color: rgba(68, 68, 68, 0.658);
             transition: transform 0.5s ease;
             /* cursor: none; */
             position: relative;
@@ -191,7 +191,7 @@
         }
 
         .tube::before {
-            content: "View Project";
+            /* content: "View Project"; */
             position: absolute;
             color: white;
             font-size: 12px;
@@ -202,6 +202,30 @@
             left: 50%;
             transform: translateX(-50%) translateY(-25px);
             text-align: center;
+        }
+
+        .card-1::before {
+            content: "About Me";
+        }
+
+        .card-2::before {
+            content: "Skills";
+        }
+
+        .card-3::before {
+            content: "Work History";
+        }
+
+        .card-4::before {
+            content: "Hobbies";
+        }
+
+        .card-5::before {
+            content: "Contact Me";
+        }
+
+        .card-6::before {
+            content: "Projects";
         }
 
         .transitionClass {
